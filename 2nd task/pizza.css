@@ -1,0 +1,209 @@
+:root {
+  --paper: #F8F5EF;
+  --surface: #F0EDE5;
+  --ink: #2C2621;
+  --stone: #7A7066;
+  --rule: #D8D1C5;
+  --accent: #7B3928;
+  --badge-bg: #D9D2C7;
+  --serif-font: 'Georgia', 'Garamond', 'Times New Roman', serif;
+  --sans-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--sans-font);
+  background-color: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+}
+
+header {
+  background-color: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.badge {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  line-height: 66px;
+  border-radius: 50%;
+  background-color: var(--badge-bg);
+  border: 1px solid var(--stone);
+  color: var(--ink);
+  font-size: 0.95rem;
+  margin: 0 auto 1.25rem auto;
+}
+
+header h1 {
+  font-family: var(--serif-font);
+  font-size: 2.1rem;
+  color: var(--ink);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+header .subtitle {
+  color: var(--stone);
+  font-style: italic;
+  font-family: var(--serif-font);
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+header .meta-info {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  color: var(--stone);
+  font-size: 0.85rem;
+}
+
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 1.5rem 0;
+}
+
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+section {
+  background-color: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1.75rem 2rem;
+}
+
+section h2 {
+  font-family: var(--serif-font);
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+section p {
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+section p strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ingredients-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 0.8rem;
+  column-gap: 2rem;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+.ingredients-grid strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+
+.instructions-list {
+  list-style: none;
+  counter-reset: step-counter;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.instructions-list li {
+  counter-increment: step-counter;
+  position: relative;
+  padding-left: 2.25rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.instructions-list li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0.15rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  background-color: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instructions-list li strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.tip-box {
+  background-color: rgba(216, 209, 197, 0.3);
+  border: 1px solid var(--rule);
+  border-left: 3px solid #2D5A27;
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.tip-box p {
+  font-size: 0.88rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.tip-box strong {
+  color: #2D5A27;
+}
+
+.nutrition-list {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-top: 0;
+}
+
+.nutrition-list li {
+  font-size: 0.92rem;
+  margin-bottom: 0.4rem;
+  color: var(--ink);
+}
+
+.nutrition-list li::marker {
+  color: var(--ink);
+}
+
+footer {
+  text-align: center;
+  color: var(--stone);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding-top: 0.25rem;
+}
