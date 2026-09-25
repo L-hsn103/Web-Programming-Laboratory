@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DexSearch — Pokémon Card Lookup</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="brand">
+      <p class="brand__mark">DexSearch</p>
+      <h1 class="brand__title">Pull a Pokémon's card</h1>
+      <p class="brand__tag">Search any Pokémon by name and see its stats, laid out like a trading card.</p>
+    </header>
+
+    <form class="search" id="search-form" novalidate>
+      <label for="search-input" class="sr-only">Pokémon name</label>
+      <input
+        type="text"
+        id="search-input"
+        class="search__input"
+        placeholder="Search a Pokémon… e.g. pikachu"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+      />
+      <button type="submit" class="search__button" id="search-button">Search</button>
+    </form>
+
+    <div class="quick-search" id="quick-search" aria-label="Quick search">
+      <button type="button" class="quick-search__chip" data-name="pikachu">Pikachu</button>
+      <button type="button" class="quick-search__chip" data-name="charizard">Charizard</button>
+      <button type="button" class="quick-search__chip" data-name="bulbasaur">Bulbasaur</button>
+    </div>
+
+    <main class="result" id="result" aria-live="polite">
+      <!-- Idle state: shown before any search has run -->
+      <section class="state state--idle" id="state-idle">
+        <p>Enter a name above, or tap a quick search to pull a card.</p>
+      </section>
+
+      <!-- Loading state -->
+      <section class="state state--loading" id="state-loading" hidden>
+        <span class="loader" aria-hidden="true"></span>
+        <p>Scanning the Pokédex…</p>
+      </section>
+
+      <!-- Error state -->
+      <section class="state state--error" id="state-error" hidden>
+        <p class="state--error__title">No match</p>
+        <p class="state--error__message" id="error-message"></p>
+      </section>
+
+      <!-- Success state: the trading card itself -->
+      <article class="card" id="card" hidden>
+        <div class="card__frame">
+          <div class="card__sheen" aria-hidden="true"></div>
+
+          <header class="card__header">
+            <h2 class="card__name" id="card-name"></h2>
+            <span class="card__id" id="card-id"></span>
+          </header>
+
+          <div class="card__art-window">
+            <img class="card__art" id="card-art" alt="" />
+          </div>
+
+          <ul class="card__types" id="card-types"></ul>
+
+          <dl class="card__physical">
+            <div class="card__physical-stat">
+              <dt>Height</dt>
+              <dd id="card-height"></dd>
+            </div>
+            <div class="card__physical-stat">
+              <dt>Weight</dt>
+              <dd id="card-weight"></dd>
+            </div>
+          </dl>
+
+          <section class="card__section">
+            <h3 class="card__section-title">Abilities</h3>
+            <ul class="card__ability-list" id="card-abilities"></ul>
+          </section>
+
+          <section class="card__section">
+            <h3 class="card__section-title">Base stats</h3>
+            <ul class="card__stat-list" id="card-stat-list"></ul>
+          </section>
+        </div>
+      </article>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
