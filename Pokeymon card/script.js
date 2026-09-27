@@ -20,6 +20,10 @@ const STAT_DISPLAY = [
 
 const STAT_MAX = 255; // PokeAPI's practical ceiling for a single base stat
 
+// Highest National Pokédex number currently in PokeAPI. Used to pick a
+// random Pokémon without needing an extra "list every name" request.
+const POKEMON_COUNT = 1025;
+
 // Simple pokeball outline shown when no artwork is available, or the
 // artwork URL fails to load, so a broken-image icon never appears.
 const NO_ARTWORK_SRC =
@@ -37,6 +41,7 @@ const form = document.getElementById("search-form");
 const input = document.getElementById("search-input");
 const button = document.getElementById("search-button");
 const quickSearch = document.getElementById("quick-search");
+const randomChip = document.getElementById("random-chip");
 
 const stateIdle = document.getElementById("state-idle");
 const stateLoading = document.getElementById("state-loading");
@@ -180,7 +185,7 @@ function renderCard(pokemon) {
 // ---------- Fetching ----------
 let latestRequestId = 0;
 
-async function searchPokemon(rawName) {
+async function searchPokemon(rawName, onSuccess) {
   const name = rawName.trim().toLowerCase();
 
   if (!name) {
@@ -223,12 +228,28 @@ async function searchPokemon(rawName) {
     const data = await response.json();
     if (requestId === latestRequestId) {
       renderCard(data);
+      if (onSuccess) onSuccess(data);
     }
   } catch (parseError) {
     if (requestId === latestRequestId) {
       showError("Received an unexpected response from the Pokédex. Please try again.");
     }
   }
+}
+
+// Picks a random National Pokédex number and searches it. Once the card is
+// rendered the input is filled with the real name, so the field always shows
+// the Pokémon that actually came up (and can be re-submitted by hand).
+function searchRandomPokemon() {
+  const id = Math.floor(Math.random() * POKEMON_COUNT) + 1;
+
+  randomChip.classList.remove("is-rolling");
+  void randomChip.offsetWidth; // restart the spin animation on repeat clicks
+  randomChip.classList.add("is-rolling");
+
+  return searchPokemon(String(id), (pokemon) => {
+    input.value = pokemon.name;
+  });
 }
 
 // ---------- Event wiring ----------
@@ -240,6 +261,11 @@ form.addEventListener("submit", (event) => {
 quickSearch.addEventListener("click", (event) => {
   const chip = event.target.closest(".quick-search__chip");
   if (!chip) return;
+
+  if (chip.dataset.random) {
+    searchRandomPokemon();
+    return;
+  }
 
   const name = chip.dataset.name;
   input.value = name;

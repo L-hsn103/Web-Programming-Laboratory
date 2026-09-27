@@ -40,6 +40,30 @@
       <button type="button" class="quick-search__chip" data-name="pikachu">Pikachu</button>
       <button type="button" class="quick-search__chip" data-name="charizard">Charizard</button>
       <button type="button" class="quick-search__chip" data-name="bulbasaur">Bulbasaur</button>
+      <button
+        type="button"
+        class="quick-search__chip quick-search__chip--random"
+        id="random-chip"
+        data-random="true"
+        title="Search a random Pokémon"
+      >
+        <svg
+          class="quick-search__icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="4" />
+          <circle cx="8.5" cy="8.5" r="1.4" fill="currentColor" stroke="none" />
+          <circle cx="15.5" cy="15.5" r="1.4" fill="currentColor" stroke="none" />
+          <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+        </svg>
+        <span class="sr-only">Random Pokémon</span>
+      </button>
     </div>
 
     <main class="result" id="result" aria-live="polite">
